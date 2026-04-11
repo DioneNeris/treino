@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Treino Calistenia + Elásticos</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --surface2: #1e1e1e;
+    --border: #2a2a2a;
+    --accent: #c8f135;
+    --text: #f0f0ec;
+    --muted: #777;
+    --push: #ff6b6b;
+    --pull: #4ecdc4;
+    --legs: #ffd93d;
+    --full: #c77dff;
+    --core: #74b9ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; }
+
+  /* HEADER */
+  .header {
+    padding: 1.5rem 1.25rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.75rem; }
+  .title { font-family: 'Space Mono', monospace; font-size: clamp(16px, 5vw, 24px); font-weight: 700; color: var(--accent); line-height: 1.2; }
+  .subtitle { font-size: 11px; color: var(--muted); margin-top: 3px; font-family: 'Space Mono', monospace; }
+  .badge { background: var(--accent); color: #0d0d0d; font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 3px; font-family: 'Space Mono', monospace; white-space: nowrap; }
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 6px 4px; text-align: center; }
+  .stat-label { font-size: 9px; color: var(--muted); font-family: 'Space Mono', monospace; display: block; margin-bottom: 1px; }
+  .stat-val { font-size: 11px; font-weight: 700; font-family: 'Space Mono', monospace; }
+
+  /* TABS */
+  .tabs-wrap {
+    display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; padding: 0.75rem 1.25rem;
+    background: var(--bg); position: sticky; top: 120px; z-index: 99;
+    border-bottom: 1px solid var(--border);
+  }
+  .tabs-wrap::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0; padding: 7px 14px; border-radius: 4px;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--muted); font-size: 11px; font-family: 'Space Mono', monospace;
+    cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  }
+  .tab-btn:active { transform: scale(0.97); }
+  .tab-btn.ap { background: var(--push); border-color: var(--push); color: #0d0d0d; font-weight: 700; }
+  .tab-btn.al { background: var(--pull); border-color: var(--pull); color: #0d0d0d; font-weight: 700; }
+  .tab-btn.ag { background: var(--legs); border-color: var(--legs); color: #0d0d0d; font-weight: 700; }
+  .tab-btn.af { background: var(--full); border-color: var(--full); color: #0d0d0d; font-weight: 700; }
+  .tab-btn.ac { background: var(--core); border-color: var(--core); color: #0d0d0d; font-weight: 700; }
+
+  /* PANELS */
+  .panel { display: none; padding: 1.25rem; }
+  .panel.active { display: block; }
+
+  .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .day-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .day-title { font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; }
+  .day-sub { font-size: 11px; color: var(--muted); }
+  .day-count { margin-left: auto; font-size: 10px; color: var(--muted); font-family: 'Space Mono', monospace; }
+
+  /* EXERCISE CARD */
+  .ex-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+  .ex-top { display: flex; }
+  .ex-bar { width: 4px; flex-shrink: 0; }
+  .ex-info { flex: 1; padding: 12px; min-width: 0; }
+  .ex-name { font-size: 14px; font-weight: 600; color: var(--text); text-decoration: none; display: block; margin-bottom: 7px; line-height: 1.3; }
+  .ex-name:active { color: var(--accent); }
+  .ex-meta { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 5px; }
+  .tag { font-size: 10px; padding: 2px 7px; border-radius: 3px; font-family: 'Space Mono', monospace; font-weight: 700; }
+  .t-sets { background: #1a2a1a; color: var(--accent); border: 1px solid #2a3a2a; }
+  .t-reps { background: #1a1a2a; color: #7eb8f7; border: 1px solid #2a2a3a; }
+  .t-eq   { background: #2a1a1a; color: #ff9999; border: 1px solid #3a2a2a; }
+  .t-home { background: #1a2a20; color: #6dffc4; border: 1px solid #2a3a30; }
+  .ex-prog { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .ex-prog::before { content: '↑ '; color: var(--accent); }
+
+  /* GIF */
+  .gif-section { border-top: 1px solid var(--border); }
+  .gif-btn {
+    width: 100%; background: var(--surface2); border: none;
+    color: var(--muted); font-size: 11px; font-family: 'Space Mono', monospace;
+    padding: 8px 12px; text-align: left; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .gif-btn:active { background: #252525; }
+  .gif-arrow { transition: transform 0.2s; }
+  .gif-box { display: none; background: #111; padding: 12px; text-align: center; }
+  .gif-box.open { display: block; }
+  .gif-box img { width: 100%; max-width: 300px; height: auto; border-radius: 8px; display: block; margin: 0 auto; }
+  .gif-fallback { display: none; }
+  .gif-fallback p { font-size: 12px; color: var(--muted); padding: 0.5rem 0; }
+  .gif-fallback a { color: var(--accent); font-size: 11px; font-family: 'Space Mono', monospace; text-decoration: none; }
+  .gif-link-below { display: block; margin-top: 8px; font-size: 11px; color: var(--accent); font-family: 'Space Mono', monospace; text-decoration: none; }
+
+  /* TIPS */
+  .tip { background: var(--surface); border-left: 3px solid var(--accent); padding: 10px 14px; margin-top: 1.25rem; font-size: 12px; color: var(--muted); line-height: 1.7; border-radius: 0 6px 6px 0; }
+  .tip strong { color: var(--text); font-weight: 600; }
+
+  /* HOME TAG badge */
+  .home-only { display: inline-block; font-size: 9px; background: #1a2a20; color: #6dffc4; border: 1px solid #2a3a30; padding: 1px 5px; border-radius: 3px; font-family: 'Space Mono', monospace; margin-left: 4px; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="title">TREINO<br>CALISTENIA</div>
+      <div class="subtitle">100% em casa · elásticos + mini bands</div>
+    </div>
+    <div class="badge">5 DIAS / SEM</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><span class="stat-label">SEG</span><span class="stat-val" style="color:var(--push)">PUSH</span></div>
+    <div class="stat"><span class="stat-label">TER</span><span class="stat-val" style="color:var(--pull)">PULL</span></div>
+    <div class="stat"><span class="stat-label">QUA</span><span class="stat-val" style="color:var(--legs)">LEGS</span></div>
+    <div class="stat"><span class="stat-label">QUI</span><span class="stat-val" style="color:var(--full)">FULL</span></div>
+    <div class="stat"><span class="stat-label">SEX</span><span class="stat-val" style="color:var(--core)">CORE</span></div>
+  </div>
+</div>
+
+<div class="tabs-wrap">
+  <button class="tab-btn ap" onclick="switchTab('push',this,'ap')">SEG · Push</button>
+  <button class="tab-btn" onclick="switchTab('pull',this,'al')">TER · Pull</button>
+  <button class="tab-btn" onclick="switchTab('legs',this,'ag')">QUA · Legs</button>
+  <button class="tab-btn" onclick="switchTab('full',this,'af')">QUI · Full</button>
+  <button class="tab-btn" onclick="switchTab('core',this,'ac')">SEX · Core</button>
+</div>
+
+<div id="panel-push" class="panel active">
+  <div class="day-header">
+    <div class="day-dot" style="background:var(--push)"></div>
+    <div><div class="day-title">Segunda — Push</div><div class="day-sub">Peito · Ombros · Tríceps</div></div>
+    <div class="day-count">6 exercícios</div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-push-up/" target="_blank">Band Push Up</a>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">8–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Aumente a tensão do elástico nas costas</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-push-up.gif" alt="Band Push Up">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-push-up/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-push-up/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-chest-fly/" target="_blank">Band Chest Fly</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Ancore elástico atrás — mais tensão ou amplitude</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-chest-fly.webp" alt="Band Chest Fly">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-chest-fly/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-chest-fly/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-shoulder-press/" target="_blank">Band Shoulder Press</a>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Elástico pisado no chão — mais tensão</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-shoulder-press.webp" alt="Band Shoulder Press">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-shoulder-press/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-shoulder-press/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-lateral-raise/" target="_blank">Band Lateral Raise</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">mini band</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Volume — adicione sets antes de aumentar tensão</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-lateral-raise.webp" alt="Band Lateral Raise">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-lateral-raise/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-lateral-raise/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-overhead-triceps-extension/" target="_blank">Band Overhead Triceps Extension</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Excêntrico controlado 3s</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-overhead-triceps-extension.webp" alt="Band Overhead Triceps Extension">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-overhead-triceps-extension/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-overhead-triceps-extension/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-triceps-kickback/" target="_blank">Band Triceps Kickback <span class="home-only">substituído ✓</span></a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Substituto do Dip — elástico pisado, cotovelo fixo</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-triceps-kickback.webp" alt="Band Triceps Kickback">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-triceps-kickback/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-triceps-kickback/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+  <div class="tip"><strong>Push:</strong> Band Assisted Dip foi substituído por Band Triceps Kickback — isolamento de tríceps eficaz sem precisar de barra ou paralelas. Elástico pisado com um pé, cotovelo colado ao corpo.</div>
+</div>
+
+<div id="panel-pull" class="panel">
+  <div class="day-header">
+    <div class="day-dot" style="background:var(--pull)"></div>
+    <div><div class="day-title">Terça — Pull</div><div class="day-sub">Costas · Bíceps · Deltóide posterior</div></div>
+    <div class="day-count">6 exercícios</div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-seated-row/" target="_blank">Band Seated Row <span class="home-only">substituído ✓</span></a>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Sentado no chão, elástico nos pés — substitui Pull Up</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-seated-row.webp" alt="Band Seated Row">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-seated-row/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-seated-row/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-bent-over-row/" target="_blank">Band Bent Over Row</a>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Tensão maior a cada semana</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-bent-over-row.webp" alt="Band Bent Over Row">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-bent-over-row/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-bent-over-row/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-close-grip-row/" target="_blank">Band Close Grip Row</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Elástico nos pés — pausa 1s no final</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-close-grip-row.webp" alt="Band Close Grip Row">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-close-grip-row/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-close-grip-row/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-face-pull/" target="_blank">Band Face Pull</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Essencial para saúde do ombro — não pule</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-face-pull.webp" alt="Band Face Pull">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-face-pull/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-face-pull/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-biceps-curl/" target="_blank">Band Biceps Curl</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Excêntrico lento 3s na descida</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-biceps-curl.webp" alt="Band Biceps Curl">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-biceps-curl/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-biceps-curl/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-pull-apart/" target="_blank">Band Pull Apart</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Deltóide posterior + postura — fácil em qualquer lugar</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-pull-apart.gif" alt="Band Pull Apart">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-pull-apart/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-pull-apart/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+  <div class="tip"><strong>Pull:</strong> Band Assisted Pull Up foi substituído por Band Seated Row — 100% no chão, elástico nos pés. Progresso: aumente a tensão e reduza a amplitude do dobramento dos joelhos.</div>
+</div>
+
+<div id="panel-legs" class="panel">
+  <div class="day-header">
+    <div class="day-dot" style="background:var(--legs)"></div>
+    <div><div class="day-title">Quarta — Legs</div><div class="day-sub">Quadríceps · Glúteos · Posteriores · Panturrilha</div></div>
+    <div class="day-count">6 exercícios</div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--legs)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-squat/" target="_blank">Band Squat</a>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Elástico sobre os ombros — aumente tensão</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-squat.webp" alt="Band Squat">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-squat/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-squat/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--legs)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-split-squat/" target="_blank">Band Split Squat</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">10 reps / lado</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Amplitude + tensão progressiva</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-split-squat.webp" alt="Band Split Squat">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-split-squat/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-split-squat/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--legs)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-hip-extension/" target="_blank">Band Hip Extension</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps / lado</span><span class="tag t-eq">mini band</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">De quatro no chão — mini band no tornozelo</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-hip-extension.webp" alt="Band Hip Extension">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-hip-extension/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-hip-extension/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--legs)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-hip-abduction/" target="_blank">Band Hip Abduction</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">20 reps</span><span class="tag t-eq">mini band</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Mini band nos joelhos — glúteo médio</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-hip-abduction.webp" alt="Band Hip Abduction">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-hip-abduction/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-hip-abduction/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--legs)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-good-morning/" target="_blank">Band Good Morning <span class="home-only">substituído ✓</span></a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Substituto do Leg Curl — posterior + lombar, elástico pisado</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-good-morning.gif" alt="Band Good Morning">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-good-morning/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-good-morning/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--legs)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-calf-raise/" target="_blank">Band Calf Raise</a>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">20–25 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Pausa de 1s no topo — elástico pisado</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-calf-raise.webp" alt="Band Calf Raise">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-calf-raise/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-calf-raise/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+  <div class="tip"><strong>Legs:</strong> Band Lying Leg Curl substituído por Band Good Morning — treina o mesmo grupo (posterior de coxa + glúteo) sem precisar fixar o elástico em nenhuma estrutura. Elástico pisado com os dois pés.</div>
+</div>
+
+<div id="panel-full" class="panel">
+  <div class="day-header">
+    <div class="day-dot" style="background:var(--full)"></div>
+    <div><div class="day-title">Quinta — Full Body</div><div class="day-sub">Resistência muscular · Compostos</div></div>
+    <div class="day-count">6 exercícios</div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--full)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-thruster/" target="_blank">Band Thruster</a>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Squat + press — melhor composto com elástico</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-thruster.gif" alt="Band Thruster">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-thruster/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-thruster/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--full)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-squat-row/" target="_blank">Band Squat Row</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Composto full body — elástico nos pés</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-squat-row.webp" alt="Band Squat Row">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-squat-row/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-squat-row/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--full)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-straight-arm-pulldown/" target="_blank">Band Straight Arm Pulldown <span class="home-only">substituído ✓</span></a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Elástico ancorado na porta — substitui Chin Up</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-straight-arm-pulldown.gif" alt="Band Straight Arm Pulldown">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-straight-arm-pulldown/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-straight-arm-pulldown/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--full)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-deadlift/" target="_blank">Band Deadlift</a>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Posterior chain — controle total, sem bater no chão</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-deadlift.webp" alt="Band Deadlift">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-deadlift/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-deadlift/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--full)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-push-up/" target="_blank">Band Push Up (resistência)</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">máximo</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Vai até a falha — resistência muscular</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-push-up.gif" alt="Band Push Up">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-push-up/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-push-up/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--full)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-good-morning/" target="_blank">Band Good Morning</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Lombar + posterior — elástico pisado, coluna neutra</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-good-morning.gif" alt="Band Good Morning">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-good-morning/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-good-morning/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+  <div class="tip"><strong>Full Body:</strong> Band Assisted Chin Up substituído por Band Straight Arm Pulldown — elástico na maçaneta da porta fechada, braços retos puxando para baixo. Ativa latissimo sem barra.</div>
+</div>
+
+<div id="panel-core" class="panel">
+  <div class="day-header">
+    <div class="day-dot" style="background:var(--core)"></div>
+    <div><div class="day-title">Sexta — Core</div><div class="day-sub">Abdômen · Lombar · Quadril · Oblíquos</div></div>
+    <div class="day-count">6 exercícios</div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-reverse-crunch/" target="_blank">Band Reverse Crunch</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Core inferior — amplitude máxima</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-reverse-crunch.webp" alt="Band Reverse Crunch">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-reverse-crunch/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-reverse-crunch/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-standing-crunch/" target="_blank">Band Standing Crunch</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Squeeze no topo por 1s</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-standing-crunch.webp" alt="Band Standing Crunch">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-standing-crunch/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-standing-crunch/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-twist/" target="_blank">Band Twist</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps / lado</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Oblíquos — rotação controlada, sem usar o braço</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-twist.webp" alt="Band Twist">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-twist/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-twist/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-pull-through/" target="_blank">Band Pull Through</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Anti-flexão lombar — exercício muito subestimado</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-pull-through.webp" alt="Band Pull Through">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-pull-through/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-pull-through/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-back-extension/" target="_blank">Band Back Extension</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Lombar + glúteo — deitado no chão</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-back-extension.webp" alt="Band Back Extension">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-back-extension/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-back-extension/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
+    <div class="ex-info">
+      <a class="ex-name" href="https://liftmanual.com/band-hip-flexion/" target="_blank">Band Hip Flexion</a>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12 reps / lado</span><span class="tag t-eq">mini band</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Mini band no tornozelo — mobilidade + força de quadril</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-hip-flexion.gif" alt="Band Hip Flexion">
+        <div class="gif-fallback"><p>Mídia não carregou</p><a href="https://liftmanual.com/band-hip-flexion/" target="_blank">Ver no Liftmanual →</a></div>
+        <a class="gif-link-below" href="https://liftmanual.com/band-hip-flexion/" target="_blank">Guia completo →</a>
+      </div>
+    </div>
+  </div>
+  <div class="tip"><strong>Core:</strong> Se chegar na sexta com fadiga acumulada, inverta com o Full Body da quinta. Recuperação supera volume.</div>
+</div>
+
+<script>
+// Padrões de data a tentar
+const DATE_PATTERNS = ['2023/04','2023/05','2023/06','2023/07','2023/08'];
+// Extensões suportadas - priorizando webp por ser mais rápido
+const EXTENSIONS = ['.webp', '.gif'];
+
+function tryLoadMedia(img) {
+  const slug = img.dataset.slug;
+  if (!slug) return;
+  
+  // Monta uma lista plana (flat list) com todas as combinações de data e extensão
+  const urlsToTry = [];
+  for (let date of DATE_PATTERNS) {
+    for (let ext of EXTENSIONS) {
+      urlsToTry.push('https://liftmanual.com/wp-content/uploads/' + date + '/' + slug + ext);
+    }
+  }
+
+  let i = 0;
+
+  function tryNext() {
+    if (i >= urlsToTry.length) {
+      // Todas as combinações falharam — mostrar fallback
+      img.style.display = 'none';
+      const fb = img.parentNode.querySelector('.gif-fallback');
+      if (fb) fb.style.display = 'block';
+      return;
+    }
+    
+    // Limpa event listeners anteriores para evitar vazamentos
+    img.onload = null;
+    img.onerror = null;
+    
+    img.onload = function() { /* Sucesso, o loop de tentativas encerra */ };
+    img.onerror = function() { 
+      i++; 
+      tryNext(); // Tenta o próximo da lista
+    };
+    img.src = urlsToTry[i];
+  }
+  
+  tryNext();
+}
+
+function toggleGif(btn) {
+  const box = btn.nextElementSibling;
+  const isOpen = box.classList.contains('open');
+  if (!isOpen) {
+    box.classList.add('open');
+    btn.querySelector('.gif-arrow').textContent = '▲';
+    // Carregar mídia ao abrir pela primeira vez
+    const img = box.querySelector('img[data-slug]');
+    if (img && !img.src) tryLoadMedia(img);
+  } else {
+    box.classList.remove('open');
+    btn.querySelector('.gif-arrow').textContent = '▼';
+  }
+}
+
+function switchTab(day, btn, cls) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.className = 'tab-btn');
+  document.getElementById('panel-' + day).classList.add('active');
+  btn.classList.add(cls);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
