@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Treino Calistenia + Elásticos</title>
+<title>Treino Calistenia + Elásticos (Foco: Hipertrofia)</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -58,10 +58,10 @@
 
   .subtitle { font-size: 11px; color: var(--muted); margin-top: 3px; font-family: 'Space Mono', monospace; }
   .badge { background: var(--accent); color: #0d0d0d; font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 3px; font-family: 'Space Mono', monospace; white-space: nowrap; margin-top: 5px; display: inline-block;}
-  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-top: 15px;}
+  .stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; margin-top: 15px;}
   .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 6px 4px; text-align: center; }
   .stat-label { font-size: 9px; color: var(--muted); font-family: 'Space Mono', monospace; display: block; margin-bottom: 1px; }
-  .stat-val { font-size: 11px; font-weight: 700; font-family: 'Space Mono', monospace; }
+  .stat-val { font-size: 10px; font-weight: 700; font-family: 'Space Mono', monospace; }
 
   /* TABS */
   .tabs-wrap {
@@ -81,7 +81,6 @@
   .tab-btn.al { background: var(--pull); border-color: var(--pull); color: #0d0d0d; font-weight: 700; }
   .tab-btn.ag { background: var(--legs); border-color: var(--legs); color: #0d0d0d; font-weight: 700; }
   .tab-btn.af { background: var(--full); border-color: var(--full); color: #0d0d0d; font-weight: 700; }
-  .tab-btn.ac { background: var(--core); border-color: var(--core); color: #0d0d0d; font-weight: 700; }
 
   /* PANELS */
   .panel { display: none; padding: 1.25rem; }
@@ -157,32 +156,34 @@
       <div>
         <div class="title">TREINO<br>CALISTENIA</div>
         <div class="subtitle">100% em casa · elásticos + mini bands</div>
-        <div class="badge">5 DIAS / SEM</div>
+        <div class="badge">6 DIAS / SEM</div>
       </div>
       <button id="theme-toggle" class="theme-btn" aria-label="Alternar Tema">☀️</button>
     </div>
   </div>
   <div class="stats">
-    <div class="stat"><span class="stat-label">SEG</span><span class="stat-val" style="color:var(--push)">PUSH</span></div>
-    <div class="stat"><span class="stat-label">TER</span><span class="stat-val" style="color:var(--pull)">PULL</span></div>
-    <div class="stat"><span class="stat-label">QUA</span><span class="stat-val" style="color:var(--legs)">LEGS</span></div>
-    <div class="stat"><span class="stat-label">QUI</span><span class="stat-val" style="color:var(--full)">FULL</span></div>
-    <div class="stat"><span class="stat-label">SEX</span><span class="stat-val" style="color:var(--core)">CORE</span></div>
+    <div class="stat"><span class="stat-label">SEG</span><span class="stat-val" style="color:var(--push)">PUSH 1</span></div>
+    <div class="stat"><span class="stat-label">TER</span><span class="stat-val" style="color:var(--pull)">PULL 1</span></div>
+    <div class="stat"><span class="stat-label">QUA</span><span class="stat-val" style="color:var(--legs)">LEGS+</span></div>
+    <div class="stat"><span class="stat-label">QUI</span><span class="stat-val" style="color:var(--push)">PUSH 2</span></div>
+    <div class="stat"><span class="stat-label">SEX</span><span class="stat-val" style="color:var(--pull)">PULL 2</span></div>
+    <div class="stat"><span class="stat-label">SÁB</span><span class="stat-val" style="color:var(--full)">FULL</span></div>
   </div>
 </div>
 
 <div class="tabs-wrap">
   <button class="tab-btn ap" onclick="switchTab('push',this,'ap')">SEG · Push</button>
   <button class="tab-btn" onclick="switchTab('pull',this,'al')">TER · Pull</button>
-  <button class="tab-btn" onclick="switchTab('legs',this,'ag')">QUA · Legs</button>
-  <button class="tab-btn" onclick="switchTab('full',this,'af')">QUI · Full</button>
-  <button class="tab-btn" onclick="switchTab('core',this,'ac')">SEX · Core</button>
+  <button class="tab-btn" onclick="switchTab('legs',this,'ag')">QUA · Legs+</button>
+  <button class="tab-btn" onclick="switchTab('push2',this,'ap')">QUI · Push 2</button>
+  <button class="tab-btn" onclick="switchTab('pull2',this,'al')">SEX · Pull 2</button>
+  <button class="tab-btn" onclick="switchTab('full',this,'af')">SÁB · Full</button>
 </div>
 
 <div id="panel-push" class="panel active">
   <div class="day-header">
     <div class="day-dot" style="background:var(--push)"></div>
-    <div><div class="day-title">Segunda — Push</div><div class="day-sub">Peito · Ombros · Tríceps</div></div>
+    <div><div class="day-title">Segunda — Push 1</div><div class="day-sub">Peito · Ombros · Tríceps</div></div>
     <div class="day-count">6 exercícios</div>
   </div>
 
@@ -202,7 +203,6 @@
           <div class="inst-exec"><strong>Execução:</strong> Passe o elástico pelas costas (altura das escápulas) e prenda as pontas sob as mãos. Desça controlado até o peito quase tocar o chão e empurre de volta.</div>
           <div class="inst-error"><strong>Evite:</strong> Deixar o quadril cair. O corpo deve se mover em bloco, mantendo o core ativado para não curvar a lombar.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-push-up/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -223,7 +223,6 @@
           <div class="inst-exec"><strong>Execução:</strong> Ancore o elástico atrás. Mantenha os braços com uma leve flexão nos cotovelos e traga as mãos até se encontrarem na frente do peito, apertando o peitoral.</div>
           <div class="inst-error"><strong>Evite:</strong> Dobrar demais os cotovelos durante o fechamento. Isso transforma o crucifixo (fly) num supino (press), roubando a tensão do peito.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-chest-fly/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -244,7 +243,6 @@
           <div class="inst-exec"><strong>Execução:</strong> Pise no meio do elástico, segure na altura dos ombros. Empurre verticalmente até estender completamente os braços acima da cabeça.</div>
           <div class="inst-error"><strong>Evite:</strong> Arquear excessivamente a lombar para ajudar no impulso. Mantenha os glúteos contraídos para proteger a coluna.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-shoulder-press/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -265,7 +263,6 @@
           <div class="inst-exec"><strong>Execução:</strong> Pise na mini band (ou elástico leve). Eleve os braços lateralmente até a altura dos ombros, mantendo uma leve curvatura no cotovelo.</div>
           <div class="inst-error"><strong>Evite:</strong> Encolher os ombros em direção às orelhas (ativando o trapézio ao invés do deltoide lateral). Mantenha o pescoço relaxado.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-lateral-raise/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -286,7 +283,6 @@
           <div class="inst-exec"><strong>Execução:</strong> Pise no elástico (ou ancore atrás baixo), segure atrás da cabeça. Estenda os antebraços para cima, apertando o tríceps no topo.</div>
           <div class="inst-error"><strong>Evite:</strong> Deixar os cotovelos "abrirem" para os lados ou se moverem para frente. Eles devem ficar fixos apontando para o teto.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-overhead-triceps-extension/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -294,9 +290,9 @@
   <div class="ex-card">
     <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
     <div class="ex-info">
-      <div class="ex-name">Band Triceps Kickback <span class="home-only">substituído ✓</span></div>
+      <div class="ex-name">Band Triceps Kickback</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Substituto do Dip — elástico pisado, cotovelo fixo</div>
+      <div class="ex-prog">Elástico pisado, cotovelo fixo</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
@@ -307,26 +303,24 @@
           <div class="inst-exec"><strong>Execução:</strong> Incline o tronco à frente, pisando no elástico. Cole o cotovelo ao lado da costela e estenda o braço todo para trás.</div>
           <div class="inst-error"><strong>Evite:</strong> Balançar o braço pendularmente. Se o cotovelo se mover para frente e para trás, o ombro estará fazendo o trabalho, não o tríceps.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-triceps-kickback/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
-  <div class="tip"><strong>Push:</strong> Band Assisted Dip foi substituído por Band Triceps Kickback — isolamento de tríceps eficaz sem precisar de barra ou paralelas. Elástico pisado com um pé, cotovelo colado ao corpo.</div>
 </div>
 
 <div id="panel-pull" class="panel">
   <div class="day-header">
     <div class="day-dot" style="background:var(--pull)"></div>
-    <div><div class="day-title">Terça — Pull</div><div class="day-sub">Costas · Bíceps · Deltóide posterior</div></div>
+    <div><div class="day-title">Terça — Pull 1</div><div class="day-sub">Costas · Bíceps · Deltóide posterior</div></div>
     <div class="day-count">6 exercícios</div>
   </div>
 
   <div class="ex-card">
     <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
     <div class="ex-info">
-      <div class="ex-name">Band Seated Row <span class="home-only">substituído ✓</span></div>
+      <div class="ex-name">Band Seated Row</div>
       <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Sentado no chão, elástico nos pés — substitui Pull Up</div>
+      <div class="ex-prog">Sentado no chão, elástico nos pés</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
@@ -334,10 +328,9 @@
         <img src="animacoes/band-seated-row.webp" alt="Band Seated Row">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Sentado com as pernas estendidas (ou joelhos levemente dobrados), passe o elástico pelos pés. Puxe em direção ao abdômen, juntando as escápulas atrás.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Sentado com as pernas estendidas, passe o elástico pelos pés. Puxe em direção ao abdômen, juntando as escápulas atrás.</div>
           <div class="inst-error"><strong>Evite:</strong> Puxar apenas com a força dos bíceps. Pense em "espremer uma moeda" entre as escápulas no final do movimento.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-seated-row/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -355,10 +348,9 @@
         <img src="animacoes/band-bent-over-row.webp" alt="Band Bent Over Row">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico, incline o tronco mantendo a coluna neutra. Puxe as mãos em direção à linha do quadril, liderando o movimento com os cotovelos.</div>
-          <div class="inst-error"><strong>Evite:</strong> Ficar muito ereto (encurta a amplitude das costas) ou arredondar a lombar (risco de lesão).</div>
+          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico, incline o tronco mantendo a coluna neutra. Puxe as mãos em direção à linha do quadril.</div>
+          <div class="inst-error"><strong>Evite:</strong> Ficar muito ereto (encurta a amplitude) ou arredondar a lombar (risco de lesão).</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-bent-over-row/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -376,10 +368,9 @@
         <img src="animacoes/band-close-grip-row.webp" alt="Band Close Grip Row">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Variação da remada com pegada fechada. Puxe com os cotovelos raspando nas costelas para focar no latíssimo do dorso (asa).</div>
-          <div class="inst-error"><strong>Evite:</strong> Encolher os ombros para cima durante a puxada. Mantenha os ombros deprimidos (para baixo).</div>
+          <div class="inst-exec"><strong>Execução:</strong> Remada fechada. Puxe com os cotovelos raspando nas costelas para focar no latíssimo do dorso.</div>
+          <div class="inst-error"><strong>Evite:</strong> Encolher os ombros para cima durante a puxada. Mantenha os ombros para baixo.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-close-grip-row/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -389,7 +380,7 @@
     <div class="ex-info">
       <div class="ex-name">Band Face Pull</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Essencial para saúde do ombro — não pule</div>
+      <div class="ex-prog">Essencial para saúde do ombro</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
@@ -397,10 +388,9 @@
         <img src="animacoes/band-face-pull.webp" alt="Band Face Pull">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Ancore à frente (altura do peito ou superior). Puxe em direção ao rosto, abrindo os braços e girando as mãos para trás, como se mostrasse os bíceps.</div>
-          <div class="inst-error"><strong>Evite:</strong> Puxar o elástico em direção ao peito ou manter os cotovelos caídos. Os cotovelos devem ficar altos na linha dos ombros.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Ancore à frente. Puxe em direção ao rosto, abrindo os braços e girando as mãos para trás, como se mostrasse os bíceps.</div>
+          <div class="inst-error"><strong>Evite:</strong> Puxar o elástico em direção ao peito ou manter os cotovelos caídos.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-face-pull/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -418,10 +408,9 @@
         <img src="animacoes/band-biceps-curl.webp" alt="Band Biceps Curl">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico, fixe os cotovelos ao lado do tronco. Flexione os braços controlando o movimento, contraindo o bíceps no topo.</div>
-          <div class="inst-error"><strong>Evite:</strong> Jogar os cotovelos para frente para ajudar a levantar. O braço não deve se mover, apenas o antebraço atua na articulação.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico, fixe os cotovelos ao lado do tronco. Flexione os braços controlando o movimento.</div>
+          <div class="inst-error"><strong>Evite:</strong> Jogar os cotovelos para frente para ajudar a levantar.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-biceps-curl/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -431,7 +420,7 @@
     <div class="ex-info">
       <div class="ex-name">Band Pull Apart</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Deltóide posterior + postura — fácil em qualquer lugar</div>
+      <div class="ex-prog">Deltóide posterior + postura</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
@@ -439,21 +428,19 @@
         <img src="animacoes/band-pull-apart.gif" alt="Band Pull Apart">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Segure o elástico à frente na linha do peito, braços retos. Abra os braços até o elástico tocar o esterno, apertando bem as escápulas.</div>
-          <div class="inst-error"><strong>Evite:</strong> Jogar o tronco para trás (hiperextensão da lombar) para ajudar a esticar a banda. O tronco deve ser uma estaca.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Segure o elástico à frente, braços retos. Abra os braços até o elástico tocar o peito, apertando as escápulas.</div>
+          <div class="inst-error"><strong>Evite:</strong> Jogar o tronco para trás (hiperextensão da lombar).</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-pull-apart/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
-  <div class="tip"><strong>Pull:</strong> Band Assisted Pull Up foi substituído por Band Seated Row — 100% no chão, elástico nos pés. Progresso: aumente a tensão e reduza a amplitude do dobramento dos joelhos.</div>
 </div>
 
 <div id="panel-legs" class="panel">
   <div class="day-header">
     <div class="day-dot" style="background:var(--legs)"></div>
-    <div><div class="day-title">Quarta — Legs</div><div class="day-sub">Quadríceps · Glúteos · Posteriores · Panturrilha</div></div>
-    <div class="day-count">6 exercícios</div>
+    <div><div class="day-title">Quarta — Legs + Core</div><div class="day-sub">Pernas · Glúteos · Abdômen</div></div>
+    <div class="day-count">8 exercícios</div>
   </div>
 
   <div class="ex-card">
@@ -469,10 +456,9 @@
         <img src="animacoes/band-squat.webp" alt="Band Squat">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico e passe-o sobre os ombros. Agache mantendo o peito alto e o peso distribuído nos pés. Suba empurrando o chão.</div>
-          <div class="inst-error"><strong>Evite:</strong> Deixar os joelhos colapsarem para dentro (valgo dinâmico). Force os joelhos levemente para fora alinhados com a ponta dos pés.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico e passe-o sobre os ombros. Agache mantendo o peito alto. Suba empurrando o chão.</div>
+          <div class="inst-error"><strong>Evite:</strong> Deixar os joelhos colapsarem para dentro.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-squat/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -490,10 +476,9 @@
         <img src="animacoes/band-split-squat.webp" alt="Band Split Squat">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico com o pé da frente, segure as pontas. Desça o joelho de trás retinho em direção ao chão e suba verticalmente.</div>
-          <div class="inst-error"><strong>Evite:</strong> Tirar o calcanhar do pé da frente do chão. O pé da frente deve estar 100% plantado para distribuir a força.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico com o pé da frente. Desça o joelho de trás retinho em direção ao chão e suba verticalmente.</div>
+          <div class="inst-error"><strong>Evite:</strong> Tirar o calcanhar do pé da frente do chão.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-split-squat/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -511,10 +496,9 @@
         <img src="animacoes/band-hip-extension.webp" alt="Band Hip Extension">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Em 4 apoios, com mini band nos pés. Chute uma perna reta para trás e para cima, focando na contração máxima do glúteo.</div>
-          <div class="inst-error"><strong>Evite:</strong> Arquear (hiperextender) a lombar no final do movimento para ganhar altura. O movimento termina onde o glúteo trava.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Em 4 apoios, com mini band nos pés. Chute uma perna reta para trás e para cima, focando no glúteo.</div>
+          <div class="inst-error"><strong>Evite:</strong> Arquear (hiperextender) a lombar no final do movimento.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-hip-extension/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -532,10 +516,9 @@
         <img src="animacoes/band-hip-abduction.webp" alt="Band Hip Abduction">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Com a mini band um pouco acima dos joelhos, agache levemente (ou faça deitado) e afaste os joelhos contra a resistência para ativar o glúteo médio.</div>
-          <div class="inst-error"><strong>Evite:</strong> Rotacionar o tronco ou perder o equilíbrio. O movimento deve isolar apenas a articulação do quadril abrindo para os lados.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Com a mini band acima dos joelhos, afaste os joelhos contra a resistência para ativar o glúteo médio.</div>
+          <div class="inst-error"><strong>Evite:</strong> Rotacionar o tronco ou perder o equilíbrio.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-hip-abduction/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -543,9 +526,9 @@
   <div class="ex-card">
     <div class="ex-top"><div class="ex-bar" style="background:var(--legs)"></div>
     <div class="ex-info">
-      <div class="ex-name">Band Good Morning <span class="home-only">substituído ✓</span></div>
+      <div class="ex-name">Band Good Morning</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Substituto do Leg Curl — posterior + lombar, elástico pisado</div>
+      <div class="ex-prog">Posterior + lombar, elástico pisado</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
@@ -553,10 +536,9 @@
         <img src="animacoes/band-good-morning.gif" alt="Band Good Morning">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico e passe-o atrás do pescoço. Com joelhos semi-destravados, jogue o quadril para trás até sentir alongar a posterior de coxa. Suba espremendo o glúteo.</div>
-          <div class="inst-error"><strong>Evite:</strong> Arredondar a coluna lombar na descida. O movimento não é curvar as costas, é "dobrar" o quadril como uma dobradiça (hinge).</div>
+          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico e passe-o atrás do pescoço. Jogue o quadril para trás até sentir alongar a posterior de coxa. Suba espremendo o glúteo.</div>
+          <div class="inst-error"><strong>Evite:</strong> Arredondar a coluna lombar na descida. O movimento é dobrar o quadril.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-good-morning/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -574,20 +556,164 @@
         <img src="animacoes/band-calf-raise.webp" alt="Band Calf Raise">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico tensionado. Eleve os calcanhares na ponta do pé o mais alto que conseguir, pause 1 segundo, e desça controladamente.</div>
-          <div class="inst-error"><strong>Evite:</strong> Fazer as repetições rápidas "quicando" no chão. O tendão de Aquiles rouba o trabalho da panturrilha nesse caso. Faça a pausa.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico tensionado. Eleve os calcanhares o mais alto que conseguir, pause 1 segundo, e desça controladamente.</div>
+          <div class="inst-error"><strong>Evite:</strong> Fazer as repetições rápidas "quicando" no chão.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-calf-raise/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
-  <div class="tip"><strong>Legs:</strong> Band Lying Leg Curl substituído por Band Good Morning — treina o mesmo grupo (posterior de coxa + glúteo) sem precisar fixar o elástico em nenhuma estrutura. Elástico pisado com os dois pés.</div>
+  
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Reverse Crunch (Core)</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Core inferior — amplitude máxima</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-reverse-crunch.webp" alt="Band Reverse Crunch">
+        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
+        <div class="inst-box">
+          <div class="inst-exec"><strong>Execução:</strong> Deitado com o elástico ancorado atrás de você e preso aos pés. Traga os joelhos em direção ao peito rolando o quadril.</div>
+          <div class="inst-error"><strong>Evite:</strong> Usar o impulso para balançar as pernas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Standing Crunch (Core)</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Squeeze no topo por 1s</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img src="animacoes/band-standing-crunch.webp" alt="Band Standing Crunch">
+        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
+        <div class="inst-box">
+          <div class="inst-exec"><strong>Execução:</strong> Com elástico ancorado no alto, segure com as mãos atrás do pescoço ou no peito. Contraia o abdômen flexionando a coluna.</div>
+          <div class="inst-error"><strong>Evite:</strong> Puxar o peso usando a força dos braços ou dobrar o quadril em vez da coluna.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="panel-push2" class="panel">
+  <div class="day-header">
+    <div class="day-dot" style="background:var(--push)"></div>
+    <div><div class="day-title">Quinta — Push 2</div><div class="day-sub">Peito · Ombros · Tríceps</div></div>
+    <div class="day-count">6 exercícios</div>
+  </div>
+  
+  <div class="tip" style="margin-bottom: 15px; margin-top: 0;"><strong>Estratégia:</strong> Segundo estímulo da semana. Tente fazer 1 repetição a mais ou usar um elástico mais firme em relação à segunda-feira.</div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Push Up</div>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">8–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Chest Fly</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Shoulder Press</div>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Lateral Raise</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">mini band</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Overhead Triceps Extension</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Triceps Kickback</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
+</div>
+
+<div id="panel-pull2" class="panel">
+  <div class="day-header">
+    <div class="day-dot" style="background:var(--pull)"></div>
+    <div><div class="day-title">Sexta — Pull 2</div><div class="day-sub">Costas · Bíceps · Deltóide posterior</div></div>
+    <div class="day-count">6 exercícios</div>
+  </div>
+
+  <div class="tip" style="margin-bottom: 15px; margin-top: 0;"><strong>Estratégia:</strong> Final da semana focada na cadeia posterior. Controle absoluto na fase excêntrica (descida).</div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Seated Row</div>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Bent Over Row</div>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Close Grip Row</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Face Pull</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Biceps Curl</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Pull Apart</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+    </div></div>
+  </div>
 </div>
 
 <div id="panel-full" class="panel">
   <div class="day-header">
     <div class="day-dot" style="background:var(--full)"></div>
-    <div><div class="day-title">Quinta — Full Body</div><div class="day-sub">Resistência muscular · Compostos</div></div>
+    <div><div class="day-title">Sábado — Full Body</div><div class="day-sub">Resistência muscular · Compostos</div></div>
     <div class="day-count">6 exercícios</div>
   </div>
 
@@ -604,10 +730,9 @@
         <img src="animacoes/band-thruster.gif" alt="Band Thruster">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Combina o agachamento com o desenvolvimento. Ao subir do agachamento de forma explosiva, use a força das pernas para empurrar o elástico para cima.</div>
-          <div class="inst-error"><strong>Evite:</strong> Separar o movimento em duas partes (agachar, parar e depois empurrar). O movimento deve ser uma transferência fluida de energia de baixo para cima.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Combina o agachamento com o desenvolvimento. Ao subir do agachamento, use a força das pernas para empurrar o elástico para cima.</div>
+          <div class="inst-error"><strong>Evite:</strong> Separar o movimento em duas partes. O movimento deve ser uma transferência fluida de energia.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-thruster/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -625,10 +750,9 @@
         <img src="animacoes/band-squat-row.webp" alt="Band Squat Row">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Ancore o elástico à sua frente. Faça um agachamento e, ao estender as pernas para subir, puxe o elástico em direção ao abdômen simultaneamente.</div>
-          <div class="inst-error"><strong>Evite:</strong> Perder a coordenação e arredondar as costas na descida, permitindo que a tensão do elástico o puxe bruscamente para frente.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Faça um agachamento e, ao estender as pernas para subir, puxe o elástico em direção ao abdômen simultaneamente.</div>
+          <div class="inst-error"><strong>Evite:</strong> Perder a coordenação e arredondar as costas na descida.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-squat-row/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -636,9 +760,9 @@
   <div class="ex-card">
     <div class="ex-top"><div class="ex-bar" style="background:var(--full)"></div>
     <div class="ex-info">
-      <div class="ex-name">Band Straight Arm Pulldown <span class="home-only">substituído ✓</span></div>
+      <div class="ex-name">Band Straight Arm Pulldown</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Elástico ancorado na porta — substitui Chin Up</div>
+      <div class="ex-prog">Elástico ancorado na porta — foca nas costas</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
@@ -646,10 +770,9 @@
         <img src="animacoes/band-straight-arm-pulldown.gif" alt="Band Straight Arm Pulldown">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Ancore o elástico no alto. Com os braços estendidos e o tronco levemente inclinado, puxe o elástico para baixo até que suas mãos cheguem aos quadris.</div>
-          <div class="inst-error"><strong>Evite:</strong> Flexionar os cotovelos durante o movimento. Se dobrar os braços, o exercício vira um Triceps Pushdown em vez de focar no latíssimo (asa).</div>
+          <div class="inst-exec"><strong>Execução:</strong> Ancore o elástico no alto. Com os braços estendidos, puxe o elástico para baixo até os quadris.</div>
+          <div class="inst-error"><strong>Evite:</strong> Flexionar os cotovelos durante o movimento.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-straight-arm-pulldown/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -667,10 +790,9 @@
         <img src="animacoes/band-deadlift.webp" alt="Band Deadlift">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise no meio do elástico e segure os lados. Mantendo a coluna esticada e o peito estufado, levante estendendo o quadril e os joelhos juntos.</div>
-          <div class="inst-error"><strong>Evite:</strong> Fazer um agachamento comum. O levantamento terra exige uma maior dobradiça de quadril, onde o tronco inclina mais à frente que num agachamento.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Pise no meio do elástico e segure os lados. Mantendo a coluna esticada, levante estendendo o quadril e os joelhos.</div>
+          <div class="inst-error"><strong>Evite:</strong> Fazer um agachamento comum. É uma dobradiça de quadril.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-deadlift/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -688,10 +810,9 @@
         <img src="animacoes/band-push-up.gif" alt="Band Push Up">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> A mesma mecânica da flexão, mas aqui o foco é resistência. Mantenha um ritmo cadenciado, sem prender a respiração, até alcançar a falha mecânica.</div>
-          <div class="inst-error"><strong>Evite:</strong> Encurtar a amplitude (meias flexões) quando começar a fadigar. É melhor tirar o elástico nas últimas repetições do que perder a amplitude correta.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Ritmo cadenciado até alcançar a falha mecânica.</div>
+          <div class="inst-error"><strong>Evite:</strong> Encurtar a amplitude quando começar a fadigar.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-push-up/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
@@ -701,7 +822,7 @@
     <div class="ex-info">
       <div class="ex-name">Band Good Morning</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Lombar + posterior — elástico pisado, coluna neutra</div>
+      <div class="ex-prog">Lombar + posterior</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
@@ -709,149 +830,12 @@
         <img src="animacoes/band-good-morning.gif" alt="Band Good Morning">
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise no elástico e passe-o atrás do pescoço. Flexione o quadril para trás mantendo os joelhos semi-estendidos e a coluna perfeitamente neutra.</div>
-          <div class="inst-error"><strong>Evite:</strong> Curvar a parte superior ou inferior das costas. O eixo do movimento é exclusivamente na articulação do quadril.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Flexione o quadril para trás mantendo a coluna neutra.</div>
+          <div class="inst-error"><strong>Evite:</strong> Curvar a parte superior ou inferior das costas.</div>
         </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-good-morning/" target="_blank">Guia completo →</a>
       </div>
     </div>
   </div>
-  <div class="tip"><strong>Full Body:</strong> Band Assisted Chin Up substituído por Band Straight Arm Pulldown — elástico na maçaneta da porta fechada, braços retos puxando para baixo. Ativa latissimo sem barra.</div>
-</div>
-
-<div id="panel-core" class="panel">
-  <div class="day-header">
-    <div class="day-dot" style="background:var(--core)"></div>
-    <div><div class="day-title">Sexta — Core</div><div class="day-sub">Abdômen · Lombar · Quadril · Oblíquos</div></div>
-    <div class="day-count">6 exercícios</div>
-  </div>
-
-  <div class="ex-card">
-    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
-    <div class="ex-info">
-      <div class="ex-name">Band Reverse Crunch</div>
-      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Core inferior — amplitude máxima</div>
-    </div></div>
-    <div class="gif-section">
-      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-reverse-crunch.webp" alt="Band Reverse Crunch">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Deitado com o elástico ancorado atrás de você e preso aos pés. Traga os joelhos em direção ao peito "rolando" levemente o quadril do chão.</div>
-          <div class="inst-error"><strong>Evite:</strong> Usar o impulso para balançar as pernas. O abdômen inferior deve trabalhar sozinho para elevar a pelve.</div>
-        </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-reverse-crunch/" target="_blank">Guia completo →</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="ex-card">
-    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
-    <div class="ex-info">
-      <div class="ex-name">Band Standing Crunch</div>
-      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Squeeze no topo por 1s</div>
-    </div></div>
-    <div class="gif-section">
-      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-standing-crunch.webp" alt="Band Standing Crunch">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Com elástico ancorado no alto, segure com as mãos atrás do pescoço ou no peito. Contraia o abdômen flexionando a coluna para a frente.</div>
-          <div class="inst-error"><strong>Evite:</strong> Puxar o peso usando a força dos braços ou flexionando a articulação do quadril, a dobra deve ocorrer apenas na coluna vertebral (abdômen).</div>
-        </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-standing-crunch/" target="_blank">Guia completo →</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="ex-card">
-    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
-    <div class="ex-info">
-      <div class="ex-name">Band Twist</div>
-      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps / lado</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Oblíquos — rotação controlada, sem usar o braço</div>
-    </div></div>
-    <div class="gif-section">
-      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-twist.webp" alt="Band Twist">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Segure o elástico ancorado na lateral do seu corpo, com braços esticados. Faça a rotação do tronco cruzando a frente do corpo, sentindo os oblíquos.</div>
-          <div class="inst-error"><strong>Evite:</strong> Girar usando os ombros ou dobrar os cotovelos. O braço funciona apenas como uma alavanca esticada, a força é do core.</div>
-        </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-twist/" target="_blank">Guia completo →</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="ex-card">
-    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
-    <div class="ex-info">
-      <div class="ex-name">Band Pull Through</div>
-      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Anti-flexão lombar — exercício muito subestimado</div>
-    </div></div>
-    <div class="gif-section">
-      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-pull-through.webp" alt="Band Pull Through">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> De costas para a âncora, passe o elástico entre as pernas. Jogue o quadril bem para trás e volte contraindo glúteos e abdômen fortemente no topo.</div>
-          <div class="inst-error"><strong>Evite:</strong> Fazer um movimento de agachamento (para baixo). O pull-through é um movimento horizontal (para trás e para frente).</div>
-        </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-pull-through/" target="_blank">Guia completo →</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="ex-card">
-    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
-    <div class="ex-info">
-      <div class="ex-name">Band Back Extension</div>
-      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Lombar + glúteo — deitado no chão</div>
-    </div></div>
-    <div class="gif-section">
-      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-back-extension.webp" alt="Band Back Extension">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Deitado de barriga para baixo, segurando o elástico. Eleve o peito e, se desejar, as pernas do chão ao mesmo tempo, contraindo a lombar.</div>
-          <div class="inst-error"><strong>Evite:</strong> Jogar a cabeça e o pescoço bruscamente para cima. Mantenha a cervical alinhada olhando para o chão durante a subida.</div>
-        </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-back-extension/" target="_blank">Guia completo →</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="ex-card">
-    <div class="ex-top"><div class="ex-bar" style="background:var(--core)"></div>
-    <div class="ex-info">
-      <div class="ex-name">Band Hip Flexion</div>
-      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12 reps / lado</span><span class="tag t-eq">mini band</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Mini band no tornozelo — mobilidade + força de quadril</div>
-    </div></div>
-    <div class="gif-section">
-      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-hip-flexion.gif" alt="Band Hip Flexion">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Em pé, com mini band nos tornozelos. Eleve o joelho (marcha) até a altura do quadril, sustentando a estabilidade pelo core.</div>
-          <div class="inst-error"><strong>Evite:</strong> Inclinar o tronco para trás para compensar a subida da perna. O tronco deve se manter perfeitamente reto e o abdômen contraído.</div>
-        </div>
-        <a class="gif-link-below" href="https://liftmanual.com/band-hip-flexion/" target="_blank">Guia completo →</a>
-      </div>
-    </div>
-  </div>
-  <div class="tip"><strong>Core:</strong> Se chegar na sexta com fadiga acumulada, inverta com o Full Body da quinta. Recuperação supera volume.</div>
 </div>
 
 <script>
@@ -884,7 +868,7 @@ themeBtn.addEventListener('click', () => {
     }
 });
 
-// Funções de UI simplificadas
+// Funções de UI
 function toggleGif(btn) {
   const box = btn.nextElementSibling;
   box.classList.toggle('open');
