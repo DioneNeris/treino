@@ -123,7 +123,7 @@
   .gif-box { display: none; background: var(--surface2); padding: 12px; text-align: center; }
   .gif-box.open { display: block; }
   .gif-box img { width: 100%; max-width: 300px; height: auto; border-radius: 8px; display: block; margin: 0 auto; }
-  .gif-link-below { display: block; margin-top: 12px; font-size: 11px; color: var(--accent); font-family: 'Space Mono', monospace; text-decoration: none; }
+  .gif-fallback { font-size: 11px; font-family: 'Space Mono', monospace; color: var(--push); display: none; margin-top: 10px;}
 
   /* INSTRUÇÕES E ERROS */
   .inst-btn {
@@ -144,8 +144,6 @@
   /* TIPS */
   .tip { background: var(--surface); border-left: 3px solid var(--accent); padding: 10px 14px; margin-top: 1.25rem; font-size: 12px; color: var(--muted); line-height: 1.7; border-radius: 0 6px 6px 0; }
   .tip strong { color: var(--text); font-weight: 600; }
-  .home-only { display: inline-block; font-size: 9px; background: #1a2a20; color: #6dffc4; border: 1px solid #2a3a30; padding: 1px 5px; border-radius: 3px; font-family: 'Space Mono', monospace; margin-left: 4px; vertical-align: middle; }
-  html[data-theme="light"] .home-only { background: #e0f2f1; color: #00695c; border-color: #b2dfdb; }
 </style>
 </head>
 <body>
@@ -155,7 +153,7 @@
     <div class="title-group">
       <div>
         <div class="title">TREINO<br>CALISTENIA</div>
-        <div class="subtitle">100% em casa · elásticos + mini bands</div>
+        <div class="subtitle">Barra Fixa + Elásticos + Mini bands</div>
         <div class="badge">6 DIAS / SEM</div>
       </div>
       <button id="theme-toggle" class="theme-btn" aria-label="Alternar Tema">☀️</button>
@@ -197,7 +195,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-push-up.gif" alt="Band Push Up">
+        <img data-slug="band-push-up" alt="Band Push Up" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Passe o elástico pelas costas (altura das escápulas) e prenda as pontas sob as mãos. Desça controlado até o peito quase tocar o chão e empurre de volta.</div>
@@ -217,11 +216,12 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-chest-fly.webp" alt="Band Chest Fly">
+        <img data-slug="band-chest-fly" alt="Band Chest Fly" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Ancore o elástico atrás. Mantenha os braços com uma leve flexão nos cotovelos e traga as mãos até se encontrarem na frente do peito, apertando o peitoral.</div>
-          <div class="inst-error"><strong>Evite:</strong> Dobrar demais os cotovelos durante o fecho. Isso transforma o crucifixo (fly) num supino (press), roubando a tensão ao peito.</div>
+          <div class="inst-error"><strong>Evite:</strong> Dobrar demais os cotovelos durante o fecho. Isso transforma o crucifixo num supino, roubando a tensão ao peito.</div>
         </div>
       </div>
     </div>
@@ -237,7 +237,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-shoulder-press.webp" alt="Band Shoulder Press">
+        <img data-slug="band-shoulder-press" alt="Band Shoulder Press" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Pise o meio do elástico, segure à altura dos ombros. Empurre verticalmente até estender completamente os braços acima da cabeça.</div>
@@ -257,11 +258,12 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-lateral-raise.webp" alt="Band Lateral Raise">
+        <img data-slug="band-lateral-raise" alt="Band Lateral Raise" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Pise a mini band (ou elástico leve). Eleve os braços lateralmente até à altura dos ombros, mantendo uma leve curvatura no cotovelo.</div>
-          <div class="inst-error"><strong>Evite:</strong> Encolher os ombros em direção às orelhas (ativando o trapézio em vez do deltoide lateral). Mantenha o pescoço relaxado.</div>
+          <div class="inst-error"><strong>Evite:</strong> Encolher os ombros em direção às orelhas. Mantenha o pescoço relaxado.</div>
         </div>
       </div>
     </div>
@@ -277,7 +279,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-overhead-triceps-extension.webp" alt="Band Overhead Triceps Extension">
+        <img data-slug="band-overhead-triceps-extension" alt="Band Overhead Triceps Extension" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Pise o elástico (ou ancore atrás baixo), segure atrás da cabeça. Estenda os antebraços para cima, apertando o tríceps no topo.</div>
@@ -297,11 +300,12 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-triceps-kickback.webp" alt="Band Triceps Kickback">
+        <img data-slug="band-triceps-kickback" alt="Band Triceps Kickback" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Incline o tronco à frente, pisando o elástico. Cole o cotovelo ao lado da costela e estenda o braço todo para trás.</div>
-          <div class="inst-error"><strong>Evite:</strong> Balançar o braço de forma pendular. Se o cotovelo se mover para a frente e para trás, o ombro estará a fazer o trabalho, não o tríceps.</div>
+          <div class="inst-error"><strong>Evite:</strong> Balançar o braço de forma pendular.</div>
         </div>
       </div>
     </div>
@@ -318,18 +322,19 @@
   <div class="ex-card">
     <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
     <div class="ex-info">
-      <div class="ex-name">Band Seated Row</div>
-      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Sentado no chão, elástico nos pés</div>
+      <div class="ex-name">Pull Up (Barra Pronada)</div>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">Máximo ou 6–10</span><span class="tag t-eq">barra</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Foco em recrutar a dorsal</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-seated-row.webp" alt="Band Seated Row">
+        <img data-slug="pull-up" alt="Pull Up" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Sentado com as pernas estendidas, passe o elástico pelos pés. Puxe em direção ao abdómen, juntando as escápulas atrás.</div>
-          <div class="inst-error"><strong>Evite:</strong> Puxar apenas com a força dos bíceps. Pense em "espremer uma moeda" entre as escápulas no final do movimento.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Pegada mais larga que os ombros, palmas viradas para a frente. Puxe o corpo até o queixo passar da barra, focando em puxar os cotovelos para baixo.</div>
+          <div class="inst-error"><strong>Evite:</strong> Balançar o corpo (kipping) excessivamente se o objetivo é hipertrofia estrita.</div>
         </div>
       </div>
     </div>
@@ -345,7 +350,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-bent-over-row.webp" alt="Band Bent Over Row">
+        <img data-slug="band-bent-over-row" alt="Band Bent Over Row" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Pise o elástico, incline o tronco mantendo a coluna neutra. Puxe as mãos em direção à linha do quadril.</div>
@@ -365,7 +371,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-close-grip-row.webp" alt="Band Close Grip Row">
+        <img data-slug="band-close-grip-row" alt="Band Close Grip Row" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Remada fechada. Puxe com os cotovelos a raspar nas costelas para focar no grande dorsal.</div>
@@ -385,7 +392,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-face-pull.webp" alt="Band Face Pull">
+        <img data-slug="band-face-pull" alt="Band Face Pull" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Ancore à frente. Puxe em direção ao rosto, abrindo os braços e rodando as mãos para trás, como se mostrasse os bíceps.</div>
@@ -405,7 +413,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-biceps-curl.webp" alt="Band Biceps Curl">
+        <img data-slug="band-biceps-curl" alt="Band Biceps Curl" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Pise o elástico, fixe os cotovelos ao lado do tronco. Flita os braços controlando o movimento.</div>
@@ -425,7 +434,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-pull-apart.gif" alt="Band Pull Apart">
+        <img data-slug="band-pull-apart" alt="Band Pull Apart" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Segure o elástico à frente, braços retos. Abra os braços até o elástico tocar no peito, apertando as escápulas.</div>
@@ -453,7 +463,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-squat.webp" alt="Band Squat">
+        <img data-slug="band-squat" alt="Band Squat" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Pise o elástico e passe-o sobre os ombros. Agache mantendo o peito alto. Suba empurrando o chão.</div>
@@ -473,11 +484,33 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-split-squat.webp" alt="Band Split Squat">
+        <img data-slug="band-split-squat" alt="Band Split Squat" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Pise o elástico com o pé da frente. Desça o joelho de trás retinho em direção ao chão e suba verticalmente.</div>
           <div class="inst-error"><strong>Evite:</strong> Tirar o calcanhar do pé da frente do chão.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ex-card">
+    <div class="ex-top"><div class="ex-bar" style="background:var(--legs)"></div>
+    <div class="ex-info">
+      <div class="ex-name">Band Romanian Deadlift (RDL)</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Substitui o Good Morning — Poupa a cervical</div>
+    </div></div>
+    <div class="gif-section">
+      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
+      <div class="gif-box">
+        <img data-slug="band-stiff-leg-deadlift" alt="Band RDL" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
+        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
+        <div class="inst-box">
+          <div class="inst-exec"><strong>Execução:</strong> Pise o meio do elástico e segure firme. Joelhos semiflexionados. Empurre o quadril para trás até alongar a posterior da coxa e volte contraindo o glúteo.</div>
+          <div class="inst-error"><strong>Evite:</strong> Arredondar a lombar na descida. O movimento é uma dobradiça de quadril, não um agachamento.</div>
         </div>
       </div>
     </div>
@@ -493,7 +526,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-hip-extension.webp" alt="Band Hip Extension">
+        <img data-slug="band-hip-extension" alt="Band Hip Extension" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Em 4 apoios, com mini band nos pés. Chute uma perna reta para trás e para cima, focando no glúteo.</div>
@@ -513,31 +547,12 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-hip-abduction.webp" alt="Band Hip Abduction">
+        <img data-slug="band-hip-abduction" alt="Band Hip Abduction" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Com a mini band acima dos joelhos, afaste os joelhos contra a resistência para ativar o glúteo médio.</div>
           <div class="inst-error"><strong>Evite:</strong> Rodar o tronco ou perder o equilíbrio.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ex-card">
-    <div class="ex-top"><div class="ex-bar" style="background:var(--legs)"></div>
-    <div class="ex-info">
-      <div class="ex-name">Band Good Morning</div>
-      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Posterior + lombar, elástico pisado</div>
-    </div></div>
-    <div class="gif-section">
-      <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-good-morning.gif" alt="Band Good Morning">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise o elástico e passe-o atrás do pescoço. Projete o quadril para trás até sentir alongar a posterior da coxa. Suba espremendo o glúteo.</div>
-          <div class="inst-error"><strong>Evite:</strong> Arredondar a coluna lombar na descida. O movimento é dobrar o quadril.</div>
         </div>
       </div>
     </div>
@@ -553,7 +568,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-calf-raise.webp" alt="Band Calf Raise">
+        <img data-slug="band-calf-raise" alt="Band Calf Raise" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Pise o elástico tensionado. Eleve os calcanhares o mais alto que conseguir, pause 1 segundo e desça controladamente.</div>
@@ -573,7 +589,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-reverse-crunch.webp" alt="Band Reverse Crunch">
+        <img data-slug="band-reverse-crunch" alt="Band Reverse Crunch" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Deitado com o elástico ancorado atrás de si e preso aos pés. Traga os joelhos em direção ao peito rodando o quadril.</div>
@@ -593,7 +610,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-standing-crunch.webp" alt="Band Standing Crunch">
+        <img data-slug="band-standing-crunch" alt="Band Standing Crunch" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Com o elástico ancorado no alto, segure com as mãos atrás do pescoço ou no peito. Contraia o abdómen fletindo a coluna.</div>
@@ -610,26 +628,16 @@
     <div><div class="day-title">Quinta — Push 2</div><div class="day-sub">Peito · Ombros · Tríceps</div></div>
     <div class="day-count">6 exercícios</div>
   </div>
-  
-  <div class="tip" style="margin-bottom: 15px; margin-top: 0;"><strong>Estratégia:</strong> Segundo estímulo da semana. Tente fazer 1 repetição a mais ou usar um elástico mais firme em relação à segunda-feira.</div>
 
   <div class="ex-card">
     <div class="ex-top"><div class="ex-bar" style="background:var(--push)"></div>
     <div class="ex-info">
       <div class="ex-name">Band Push Up</div>
       <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">8–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Aumente a tensão do elástico nas costas</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-push-up.gif" alt="Band Push Up">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Passe o elástico pelas costas (altura das escápulas) e prenda as pontas sob as mãos. Desça controlado até o peito quase tocar o chão e empurre de volta.</div>
-          <div class="inst-error"><strong>Evite:</strong> Deixar o quadril cair. O corpo deve mover-se em bloco, mantendo o core ativado para não curvar a lombar.</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="band-push-up" alt="Band Push Up" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 
@@ -638,18 +646,10 @@
     <div class="ex-info">
       <div class="ex-name">Band Chest Fly</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Ancore elástico atrás — mais tensão ou amplitude</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-chest-fly.webp" alt="Band Chest Fly">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Ancore o elástico atrás. Mantenha os braços com uma leve flexão nos cotovelos e traga as mãos até se encontrarem na frente do peito, apertando o peitoral.</div>
-          <div class="inst-error"><strong>Evite:</strong> Dobrar demais os cotovelos durante o fecho. Isso transforma o crucifixo (fly) num supino (press), roubando a tensão ao peito.</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="band-chest-fly" alt="Band Chest Fly" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 
@@ -658,18 +658,10 @@
     <div class="ex-info">
       <div class="ex-name">Band Shoulder Press</div>
       <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Elástico pisado no chão — mais tensão</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-shoulder-press.webp" alt="Band Shoulder Press">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise o meio do elástico, segure à altura dos ombros. Empurre verticalmente até estender completamente os braços acima da cabeça.</div>
-          <div class="inst-error"><strong>Evite:</strong> Arquear excessivamente a lombar para ajudar no impulso. Mantenha os glúteos contraídos para proteger a coluna.</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="band-shoulder-press" alt="Band Shoulder Press" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 
@@ -678,18 +670,10 @@
     <div class="ex-info">
       <div class="ex-name">Band Lateral Raise</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">mini band</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Volume — adicione sets antes de aumentar tensão</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-lateral-raise.webp" alt="Band Lateral Raise">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise a mini band (ou elástico leve). Eleve os braços lateralmente até à altura dos ombros, mantendo uma leve curvatura no cotovelo.</div>
-          <div class="inst-error"><strong>Evite:</strong> Encolher os ombros em direção às orelhas (ativando o trapézio em vez do deltoide lateral). Mantenha o pescoço relaxado.</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="band-lateral-raise" alt="Band Lateral Raise" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 
@@ -698,18 +682,10 @@
     <div class="ex-info">
       <div class="ex-name">Band Overhead Triceps Extension</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Excêntrico controlado 3s</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-overhead-triceps-extension.webp" alt="Band Overhead Triceps Extension">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise o elástico (ou ancore atrás baixo), segure atrás da cabeça. Estenda os antebraços para cima, apertando o tríceps no topo.</div>
-          <div class="inst-error"><strong>Evite:</strong> Deixar os cotovelos "abrirem" para os lados ou moverem-se para a frente. Devem ficar fixos a apontar para o teto.</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="band-overhead-triceps-extension" alt="Triceps Ext" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 
@@ -718,18 +694,10 @@
     <div class="ex-info">
       <div class="ex-name">Band Triceps Kickback</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Elástico pisado, cotovelo fixo</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-triceps-kickback.webp" alt="Band Triceps Kickback">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Incline o tronco à frente, pisando o elástico. Cole o cotovelo ao lado da costela e estenda o braço todo para trás.</div>
-          <div class="inst-error"><strong>Evite:</strong> Balançar o braço de forma pendular. Se o cotovelo se mover para a frente e para trás, o ombro estará a fazer o trabalho, não o tríceps.</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="band-triceps-kickback" alt="Triceps Kickback" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 </div>
@@ -741,25 +709,16 @@
     <div class="day-count">6 exercícios</div>
   </div>
 
-  <div class="tip" style="margin-bottom: 15px; margin-top: 0;"><strong>Estratégia:</strong> Final da semana focado na cadeia posterior. Controlo absoluto na fase excêntrica (descida).</div>
-
   <div class="ex-card">
     <div class="ex-top"><div class="ex-bar" style="background:var(--pull)"></div>
     <div class="ex-info">
-      <div class="ex-name">Band Seated Row</div>
-      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Sentado no chão, elástico nos pés</div>
+      <div class="ex-name">Chin Up (Barra Supinada)</div>
+      <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">Máximo ou 6–10</span><span class="tag t-eq">barra</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Foco máximo no bíceps e dorsal inferior</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-seated-row.webp" alt="Band Seated Row">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Sentado com as pernas estendidas, passe o elástico pelos pés. Puxe em direção ao abdómen, juntando as escápulas atrás.</div>
-          <div class="inst-error"><strong>Evite:</strong> Puxar apenas com a força dos bíceps. Pense em "espremer uma moeda" entre as escápulas no final do movimento.</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="chin-up" alt="Chin Up" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 
@@ -768,18 +727,10 @@
     <div class="ex-info">
       <div class="ex-name">Band Bent Over Row</div>
       <div class="ex-meta"><span class="tag t-sets">4 sets</span><span class="tag t-reps">10–12 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Tensão maior a cada semana</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-bent-over-row.webp" alt="Band Bent Over Row">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise o elástico, incline o tronco mantendo a coluna neutra. Puxe as mãos em direção à linha do quadril.</div>
-          <div class="inst-error"><strong>Evite:</strong> Ficar muito ereto (encurta a amplitude) ou arredondar a lombar (risco de lesão).</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="band-bent-over-row" alt="Bent Over Row" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 
@@ -788,18 +739,10 @@
     <div class="ex-info">
       <div class="ex-name">Band Close Grip Row</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Elástico nos pés — pausa 1s no final</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-close-grip-row.webp" alt="Band Close Grip Row">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Remada fechada. Puxe com os cotovelos a raspar nas costelas para focar no grande dorsal.</div>
-          <div class="inst-error"><strong>Evite:</strong> Encolher os ombros para cima durante a puxada. Mantenha os ombros para baixo.</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="band-close-grip-row" alt="Close Grip Row" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 
@@ -808,18 +751,10 @@
     <div class="ex-info">
       <div class="ex-name">Band Face Pull</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15–20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Essencial para saúde do ombro</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-face-pull.webp" alt="Band Face Pull">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Ancore à frente. Puxe em direção ao rosto, abrindo os braços e rodando as mãos para trás, como se mostrasse os bíceps.</div>
-          <div class="inst-error"><strong>Evite:</strong> Puxar o elástico em direção ao peito ou manter os cotovelos descaídos.</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="band-face-pull" alt="Face Pull" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 
@@ -828,18 +763,10 @@
     <div class="ex-info">
       <div class="ex-name">Band Biceps Curl</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">12–15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Excêntrico lento 3s na descida</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-biceps-curl.webp" alt="Band Biceps Curl">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Pise o elástico, fixe os cotovelos ao lado do tronco. Flita os braços controlando o movimento.</div>
-          <div class="inst-error"><strong>Evite:</strong> Projetar os cotovelos para a frente para ajudar a levantar a carga.</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="band-biceps-curl" alt="Biceps Curl" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 
@@ -848,18 +775,10 @@
     <div class="ex-info">
       <div class="ex-name">Band Pull Apart</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">20 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Deltóide posterior + postura</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
-      <div class="gif-box">
-        <img src="animacoes/band-pull-apart.gif" alt="Band Pull Apart">
-        <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
-        <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Segure o elástico à frente, braços retos. Abra os braços até o elástico tocar no peito, apertando as escápulas.</div>
-          <div class="inst-error"><strong>Evite:</strong> Projetar o tronco para trás (hiperextensão da lombar).</div>
-        </div>
-      </div>
+      <div class="gif-box"><img data-slug="band-pull-apart" alt="Pull Apart" style="display:none;"><div class="gif-fallback">[Indisponível]</div></div>
     </div>
   </div>
 </div>
@@ -881,7 +800,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-thruster.gif" alt="Band Thruster">
+        <img data-slug="band-thruster" alt="Band Thruster" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Combina o agachamento com o desenvolvimento. Ao subir do agachamento, use a força das pernas para empurrar o elástico para cima.</div>
@@ -901,7 +821,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-squat-row.webp" alt="Band Squat Row">
+        <img data-slug="band-squat-row" alt="Band Squat Row" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Faça um agachamento e, ao estender as pernas para subir, puxe o elástico em direção ao abdómen simultaneamente.</div>
@@ -916,12 +837,13 @@
     <div class="ex-info">
       <div class="ex-name">Band Straight Arm Pulldown</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Elástico ancorado na porta — foca nas costas</div>
+      <div class="ex-prog">Elástico ancorado alto — foca nas costas</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-straight-arm-pulldown.gif" alt="Band Straight Arm Pulldown">
+        <img data-slug="band-straight-arm-pulldown" alt="Band Straight Arm Pulldown" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Ancore o elástico no alto. Com os braços estendidos, puxe o elástico para baixo até aos quadris.</div>
@@ -941,7 +863,8 @@
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-deadlift.webp" alt="Band Deadlift">
+        <img data-slug="band-deadlift" alt="Band Deadlift" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
           <div class="inst-exec"><strong>Execução:</strong> Pise o meio do elástico e segure as laterais. Mantendo a coluna esticada, levante estendendo o quadril e os joelhos.</div>
@@ -954,18 +877,19 @@
   <div class="ex-card">
     <div class="ex-top"><div class="ex-bar" style="background:var(--full)"></div>
     <div class="ex-info">
-      <div class="ex-name">Band Push Up (resistência)</div>
-      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">máximo</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Vai até à falha — resistência muscular</div>
+      <div class="ex-name">Standing Band Chest Press</div>
+      <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">Falha</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
+      <div class="ex-prog">Substitui a Push Up (resistência) com mais segurança</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-push-up.gif" alt="Band Push Up">
+        <img data-slug="band-chest-press" alt="Band Chest Press" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Ritmo cadenciado até alcançar a falha mecânica.</div>
-          <div class="inst-error"><strong>Evite:</strong> Encurtar a amplitude quando começar a fadigar.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Ancore o elástico atrás. Em pé, empurre o elástico para a frente até estender os braços, unindo as mãos. Faça até a exaustão.</div>
+          <div class="inst-error"><strong>Evite:</strong> Usar o peso do corpo jogando o tronco para a frente. Apenas o peitoral e tríceps devem trabalhar.</div>
         </div>
       </div>
     </div>
@@ -974,18 +898,19 @@
   <div class="ex-card">
     <div class="ex-top"><div class="ex-bar" style="background:var(--full)"></div>
     <div class="ex-info">
-      <div class="ex-name">Band Good Morning</div>
+      <div class="ex-name">Band Glute Bridge</div>
       <div class="ex-meta"><span class="tag t-sets">3 sets</span><span class="tag t-reps">15 reps</span><span class="tag t-eq">elástico</span><span class="tag t-home">casa ✓</span></div>
-      <div class="ex-prog">Lombar + posterior</div>
+      <div class="ex-prog">Protege a lombar ao final do treino</div>
     </div></div>
     <div class="gif-section">
       <button class="gif-btn" onclick="toggleGif(this)"><span>Form &amp; Visual</span><span class="gif-arrow">▼</span></button>
       <div class="gif-box">
-        <img src="animacoes/band-good-morning.gif" alt="Band Good Morning">
+        <img data-slug="band-glute-bridge" alt="Band Glute Bridge" style="display:none;">
+        <div class="gif-fallback">[Animação indisponível temporariamente]</div>
         <button class="inst-btn" onclick="toggleInst(this)"><span>📖 Instruções e Erros</span><span class="inst-arrow">▼</span></button>
         <div class="inst-box">
-          <div class="inst-exec"><strong>Execução:</strong> Flita o quadril para trás mantendo a coluna neutra.</div>
-          <div class="inst-error"><strong>Evite:</strong> Curvar a parte superior ou inferior das costas.</div>
+          <div class="inst-exec"><strong>Execução:</strong> Deitado no chão com joelhos dobrados. Passe o elástico sobre a pélvis, segurando as pontas no chão. Eleve o quadril espremendo os glúteos.</div>
+          <div class="inst-error"><strong>Evite:</strong> Empurrar com a ponta dos pés. Empurre sempre com os calcanhares.</div>
         </div>
       </div>
     </div>
@@ -993,11 +918,10 @@
 </div>
 
 <script>
-// Gerenciador de Tema (Light/Dark Mode)
+// Gerenciador de Tema
 const themeBtn = document.getElementById('theme-toggle');
 const root = document.documentElement;
 
-// Verifica se há preferência salva ou se o sistema do utilizador prefere modo claro
 const savedTheme = localStorage.getItem('theme');
 const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
 
@@ -1022,11 +946,61 @@ themeBtn.addEventListener('click', () => {
     }
 });
 
-// Funções de UI
+// SCRIPT AVANÇADO DE LOAD DE GIFS (LiftManual / Fallbacks)
+const DATE_PATTERNS = [
+  '2023/10', '2023/09', '2023/08', '2023/11', '2023/12', 
+  '2024/01', '2024/02', '2023/07', '2023/06', '2023/05',
+  '2022/10', '2022/09', '2022/08'
+];
+
+function tryLoadGif(img) {
+  const slug = img.dataset.slug;
+  if (!slug) return;
+  let i = 0;
+  
+  function tryNext() {
+    if (i >= DATE_PATTERNS.length) {
+      // Se não encontrar em nenhuma data, mostra a mensagem de erro
+      img.style.display = 'none';
+      const fb = img.parentNode.querySelector('.gif-fallback');
+      if (fb) fb.style.display = 'block';
+      return;
+    }
+    const url = 'https://liftmanual.com/wp-content/uploads/' + DATE_PATTERNS[i] + '/' + slug + '.gif';
+    
+    const tempImg = new Image();
+    tempImg.onload = function() {
+      img.src = url;
+      img.style.display = 'block';
+      const fb = img.parentNode.querySelector('.gif-fallback');
+      if (fb) fb.style.display = 'none';
+    };
+    tempImg.onerror = function() {
+      i++;
+      tryNext();
+    };
+    tempImg.src = url;
+  }
+  tryNext();
+}
+
 function toggleGif(btn) {
   const box = btn.nextElementSibling;
-  box.classList.toggle('open');
-  btn.querySelector('.gif-arrow').textContent = box.classList.contains('open') ? '▲' : '▼';
+  const isOpen = box.classList.contains('open');
+  
+  if (!isOpen) {
+    box.classList.add('open');
+    btn.querySelector('.gif-arrow').textContent = '▲';
+    
+    // Iniciar o download do GIF apenas quando o usuário abrir a seção
+    const img = box.querySelector('img[data-slug]');
+    if (img && !img.src) {
+      tryLoadGif(img);
+    }
+  } else {
+    box.classList.remove('open');
+    btn.querySelector('.gif-arrow').textContent = '▼';
+  }
 }
 
 function toggleInst(btn) {
